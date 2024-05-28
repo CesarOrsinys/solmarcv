@@ -54,6 +54,6 @@ entries.forEach(entry => {
     }
 
     // Controles de cámara (opcional)
-    const controls = new OrbitControls(camera, renderer.domElement);
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
     animate();
     
