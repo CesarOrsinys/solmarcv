@@ -29,8 +29,11 @@ function loadModel(entry) {
 
     // Cargar modelo 3D
     const loader = new THREE.GLTFLoader();
-    loader.load(entry.modelUrl, (gltf) => {
-        scene.add(gltf.scene);
+        loader.load(entry.modelUrl, (collada) => {
+        const scene = collada.scene;
+        // Agregar la escena a tu escena Three.js
+        scene.scale.set(0.01, 0.01, 0.01); // Ajustar la escala según sea necesario
+        yourScene.add(scene);
     });
 }
 
