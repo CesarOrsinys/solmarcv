@@ -27,4 +27,33 @@ function loadModel(entry) {
 entries.forEach(entry => {
     loadModel(entry);
 });
+
+ // Configurar la escena WebGL
+    const renderer = new THREE.WebGLRenderer({
+      canvas: document.getElementById('modelo-3d'),
+    });
+
+    // Agregar una cámara
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    scene.add(camera);
+
+    // Agregar iluminación
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(10, 10, 10);
+    scene.add(directionalLight);
+
+    // Renderizar el modelo
+    function animate() {
+      requestAnimationFrame(animate);
+
+      controls.update();
+      renderer.render(scene, camera);
+    }
+
+    // Controles de cámara (opcional)
+    const controls = new OrbitControls(camera, renderer.domElement);
+    animate();
     
