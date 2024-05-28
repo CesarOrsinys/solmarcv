@@ -1,42 +1,41 @@
-HTML
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Portafolio 3D</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
+// Definir datos de las entradas (ejemplo)
+const entries = [
+    {
+        title: "Entrada 1",
+        modelUrl: "modelo1.dae",
+        photos: ["foto1.jpg", "foto2.jpg", "foto3.jpg"]
+    },
+    {
+        title: "Entrada 2",
+        modelUrl: "modelo2.dae",
+        photos: ["foto4.jpg", "foto5.jpg", "foto6.jpg"]
+    }
+];
 
-</head>
-<body>
-    <header>
-        <h1>Tu Portafolio</h1>
-    </header>
+// Inicializar variables
+let currentEntry = 0; // Índice de la entrada actual
+let scene, camera, renderer;
 
-    <main>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div id="modelo-3d"></div> </div>
-                <div class="col-md-6">
-                    <h2>Galería de Imágenes</h2>
-                    <div id="carousel-imagenes" class="carousel slide" data-ride="carousel">
-                        </div>
-                </div>
-            </div>
-        </div>
-    </main>
+// Función para cargar y renderizar el modelo 3D
+function loadModel(entry) {
+    // Crear escena, cámara y renderer de Three.js
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    renderer = new THREE.WebGLRenderer({ antialias: true });
 
-    <footer>
-        <p>&copy; 2024 Tu Nombre</p>
-    </footer>
+    // Configurar el renderer
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById('modelo-3d').appendChild(renderer.domElement);
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.min.js"></script>
-	<script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+    // Cargar modelo 3D
+    const loader = new THREE.GLTFLoader();
+    loader.load(entry.modelUrl, (gltf) => {
+        scene.add(gltf.scene);
+    });
+}
+
+// Load models for all entries using a forEach loop
+entries.forEach(entry => {
+    loadModel(entry);
+});
+    
