@@ -1,0 +1,38 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+.entry {
+    margin-bottom: 50px;
+}
+
+.entry-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.entry-model {
+    margin-bottom: 20px;
+}
+
+.entry-photos img {
+    max-width: 100%;
+    margin-bottom: 10px;
+}
