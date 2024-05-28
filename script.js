@@ -30,7 +30,7 @@ entries.forEach(entry => {
 
  // Configurar la escena WebGL
     const renderer = new THREE.WebGLRenderer({
-      canvas: document.getElementById('modelo-3d'),
+      canvas: document.getElementById('my-canvas'),
     });
 
     // Agregar una cámara
