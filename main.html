@@ -22,71 +22,68 @@
    
     <!-- Importa GLTFLoader -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var entries = [
-                {
-                    title: "Entrada 1",
-                    modelUrl: "modelo1.glb", // Cambia a formato GLB (o GLTF) para usar con GLTFLoader
-                    photos: ["foto1.jpg", "foto2.jpg", "foto3.jpg"]
-                },
-                {
-                    title: "Entrada 2",
-                    modelUrl: "modelo2.glb", // Cambia a formato GLB (o GLTF) para usar con GLTFLoader
-                    photos: ["foto4.jpg", "foto5.jpg", "foto6.jpg"]
-                },
-                // Agrega más entradas según sea necesario
-            ];
+        ocument.addEventListener("DOMContentLoaded", function () {
+  var entries = [{
+    title: "Entrada 1",
+    modelUrl: "modelo1.glb",
+    // Cambia a formato GLB (o GLTF) para usar con GLTFLoader
+    photos: ["foto1.jpg", "foto2.jpg", "foto3.jpg"]
+  }, {
+    title: "Entrada 2",
+    modelUrl: "modelo2.glb",
+    // Cambia a formato GLB (o GLTF) para usar con GLTFLoader
+    photos: ["foto4.jpg", "foto5.jpg", "foto6.jpg"]
+  }
+  // Agrega más entradas según sea necesario
+  ];
 
-            var entriesContainer = document.getElementById("entries");
+  var entriesContainer = document.getElementById("entries");
+  entries.forEach(function (entry) {
+    var entryDiv = document.createElement("div");
+    entryDiv.classList.add("entry");
+    var title = document.createElement("h2");
+    title.classList.add("entry-title");
+    title.textContent = entry.title;
+    var modelContainer = document.createElement("div");
+    modelContainer.classList.add("entry-model");
+    entryDiv.appendChild(title);
+    entryDiv.appendChild(modelContainer);
+    entriesContainer.appendChild(entryDiv);
 
-            entries.forEach(function(entry) {
-                var entryDiv = document.createElement("div");
-                entryDiv.classList.add("entry");
+    // Crea una escena Three.js
+    var scene = new THREE.Scene();
 
-                var title = document.createElement("h2");
-                title.classList.add("entry-title");
-                title.textContent = entry.title;
+    // Crea una cámara Three.js
+    var camera = new THREE.PerspectiveCamera(75, modelContainer.offsetWidth / modelContainer.offsetHeight, 0.1, 1000);
+    camera.position.set(0, 0, 5);
 
-                var modelContainer = document.createElement("div");
-                modelContainer.classList.add("entry-model");
-                entryDiv.appendChild(title);
-                entryDiv.appendChild(modelContainer);
-                entriesContainer.appendChild(entryDiv);
+    // Crea un renderizador Three.js
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(modelContainer.offsetWidth, modelContainer.offsetHeight);
+    modelContainer.appendChild(renderer.domElement);
 
-                // Crea una escena Three.js
-                var scene = new THREE.Scene();
+    // Carga el modelo 3D
+    var loader = new THREE.GLTFLoader();
+    loader.load(entry.modelUrl, function (gltf) {
+      var model = gltf.scene;
+      scene.add(model);
 
-                // Crea una cámara Three.js
-                var camera = new THREE.PerspectiveCamera(75, modelContainer.offsetWidth / modelContainer.offsetHeight, 0.1, 1000);
-                camera.position.set(0, 0, 5);
+      // Renderiza la escena
+      function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+      animate();
+    });
 
-                // Crea un renderizador Three.js
-                var renderer = new THREE.WebGLRenderer();
-                renderer.setSize(modelContainer.offsetWidth, modelContainer.offsetHeight);
-                modelContainer.appendChild(renderer.domElement);
-
-                // Carga el modelo 3D
-                var loader = new THREE.GLTFLoader();
-                loader.load(entry.modelUrl, function(gltf) {
-                    var model = gltf.scene;
-                    scene.add(model);
-
-                    // Renderiza la escena
-                    function animate() {
-                        requestAnimationFrame(animate);
-                        renderer.render(scene, camera);
-                    }
-                    animate();
-                });
-
-                // Maneja el redimensionamiento de la ventana
-                window.addEventListener('resize', function() {
-                    camera.aspect = modelContainer.offsetWidth / modelContainer.offsetHeight;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(modelContainer.offsetWidth, modelContainer.offsetHeight);
-                }, false);
-            });
-        });
+    // Maneja el redimensionamiento de la ventana
+    window.addEventListener('resize', function () {
+      camera.aspect = modelContainer.offsetWidth / modelContainer.offsetHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(modelContainer.offsetWidth, modelContainer.offsetHeight);
+    }, false);
+  });
+});
     </script>
 </body>
 </html>
