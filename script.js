@@ -20,10 +20,11 @@ let scene
 function loadModel(entry) {
     const loader = new THREE.ColladaLoader();
     loader.load(entry.modelUrl, (collada) => {
-        const scene = collada.scene;
-        // Agregar la escena a tu escena Three.js
-        scene.scale.set(0.01, 0.01, 0.01); // Ajustar la escala según sea necesario
-        yourScene.add(scene);
+        const model = collada.scene;
+        // Ajustar la escala según sea necesario
+        model.scale.set(0.01, 0.01, 0.01);
+        // Agregar el modelo a tu escena
+        scene.add(model);
     });
 }
 
