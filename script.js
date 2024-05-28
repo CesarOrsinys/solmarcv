@@ -2,12 +2,12 @@
 const entries = [
     {
         title: "Entrada 1",
-        modelUrl: "modelo1.dae",
+        modelUrl: "Render Week_mayo22_01otroG.dae",
         photos: ["foto1.jpg", "foto2.jpg", "foto3.jpg"]
     },
     {
         title: "Entrada 2",
-        modelUrl: "modelo2.dae",
+        modelUrl: "Render Week_mayo22_01otroG.dae",
         photos: ["foto4.jpg", "foto5.jpg", "foto6.jpg"]
     }
 ];
