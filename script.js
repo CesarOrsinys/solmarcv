@@ -14,7 +14,7 @@ const entries = [
 
 // Inicializar variables
 let currentEntry = 0; // Índice de la entrada actual
-let scene
+const scene = new THREE.Scene();
 
 // Función para cargar y renderizar el modelo 3D
 function loadModel(entry) {
