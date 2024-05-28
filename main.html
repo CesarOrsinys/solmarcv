@@ -16,17 +16,18 @@
         </section>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/GLTFLoader.js"></script> <!-- Importa GLTFLoader -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var entries = [
                 {
                     title: "Entrada 1",
-                    modelUrl: "modelo1.dae",
+                    modelUrl: "modelo1.glb", // Cambia a formato GLB (o GLTF) para usar con GLTFLoader
                     photos: ["foto1.jpg", "foto2.jpg", "foto3.jpg"]
                 },
                 {
                     title: "Entrada 2",
-                    modelUrl: "modelo2.dae",
+                    modelUrl: "modelo2.glb", // Cambia a formato GLB (o GLTF) para usar con GLTFLoader
                     photos: ["foto4.jpg", "foto5.jpg", "foto6.jpg"]
                 },
                 // Agrega más entradas según sea necesario
@@ -61,9 +62,9 @@
                 modelContainer.appendChild(renderer.domElement);
 
                 // Carga el modelo 3D
-                var loader = new THREE.ColladaLoader();
-                loader.load(entry.modelUrl, function(collada) {
-                    var model = collada.scene;
+                var loader = new THREE.GLTFLoader();
+                loader.load(entry.modelUrl, function(gltf) {
+                    var model = gltf.scene;
                     scene.add(model);
 
                     // Renderiza la escena
